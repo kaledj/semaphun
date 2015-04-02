@@ -63,3 +63,37 @@ $ diff -r /usr/src/commands/getty/getty.c /usr/src-orig/commands/getty/getty.c
 ---
 >   static char *def_banner[] = { "%s  Release %r Version %v  (%t)\n\n%n login: ", 0 };
 ```
+
+# Problem 4
+
+## Solution
+* Modify the ttys file to include an entry for a new console
+
+* Change 'NR_CONS' in /usr/src/include/minix/config.h from 4 to 5 
+
+* Navigate to /dev and run MAKEDEV
+  ```
+  $ cd /dev
+  $ MAKEDEV ttyc4
+  ```
+  
+* Make new image and install to hard disk
+  ```
+  $ cd /usr/src/releasetools
+  $ make hdboot
+  ```
+  
+## Diffs
+```
+$ diff /etc/ttys /etc/ttys.bak
+10d9
+< ttyc4     getty       minix   on secure
+```
+
+```
+$ diff config.h config.h.bak
+52c52
+< #define NR_CONS   4   /* # system consoles (1 to 8) */
+---
+> #define NR_CONS   5   /* # system consoles (1 to 8) */
+```
