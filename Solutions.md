@@ -1,3 +1,7 @@
+## Authorship
+* David Kale
+* Nathan Hernandez
+
 # Problem 1
 
 ## Solution
